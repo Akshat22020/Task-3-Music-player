@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="Music.css" />
+    <script
+      src="https://kit.fontawesome.com/791c2db010.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="music_player">
+        <nav>
+          <div class="circle">
+            <i class="fa-solid fa-angle-left"></i>
+          </div>
+          <div class="circle">
+            <i class="fa-solid fa-bars"></i>
+          </div>
+        </nav>
+        <img src="https://scontent.fdel1-4.fna.fbcdn.net/v/t39.30808-6/458756474_1073307860832281_3086414700153074554_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=ldRMCmXfl2MQ7kNvgGcv616&_nc_ht=scontent.fdel1-4.fna&_nc_gid=APh664oiswqdHhc0vyJJ4ZK&oh=00_AYBfj5_cgsCGzoQExjHrDGjIIlMnxziZer1pPQebDrml_A&oe=66EF6501" class="song_img" alt="" />
+        <h1>The-Weeknd-Dancing-In-The-Flames-</h1>
+        <p>The Weeknd</p>
+
+        <audio  id="song">
+          <source src="C:\Users\AKSHAT\Downloads\The-Weeknd-Dancing-In-The-Flames-(HipHopKit.com).mp3" type="audio/mpeg" />
+        </audio>
+        <input type="range" value="0" id="progress" />
+        <div class="controls" >
+          <div><i class="fa-solid fa-backward"></i></div>
+          <div onclick="playpause()"><i class="fa-solid fa-play" id="ctrlIcon"></i></div>
+          <div><i class="fa-solid fa-forward"></i></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      let progress = document.getElementById("progress");
+      let song = document.getElementById("song");
+      let ctrlIcon = document.getElementById("ctrlIcon");
+
+      song.onloadedmetadata = function () {
+        progress.max = song.duration;
+        progress.value = song.currentTime;
+      };
+
+
+      function playpause() {
+        if (ctrlIcon.classList.contains("fa-pause")) {
+          song.pause();
+          ctrlIcon.classList.remove("fa-pause");
+          ctrlIcon.classList.add("fa-play");
+        } else {
+          song.play();
+          ctrlIcon.classList.add("fa-pause");
+          ctrlIcon.classList.remove("fa-play");
+        }
+      }
+
+      
+      if(song.play()){
+        setInterval(()=>{
+          progress.value = song.currentTime;
+        },500);
+      }
+
+      progress.onchange=function(){
+        song.play();
+        song.currentTime = progress.value;
+        ctrlIcon.classList.add("fa-pause");
+        ctrlIcon.classList.remove("fa-play");
+      }
+    </script>
+  </body>
+</html>
